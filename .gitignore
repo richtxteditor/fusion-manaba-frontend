@@ -1,0 +1,71 @@
+# =================================================================== #
+#    .gitignore for a Vite + React + TypeScript Project             #
+# =================================================================== #
+
+# --- Dependencies ---
+# The node_modules folder is generated from package-lock.json
+/node_modules
+
+# --- Build & Development Artifacts ---
+# Vite/bundler output and cache directories
+/dist
+/dist-ssr
+.vite/
+
+# Test coverage reports
+/coverage
+.nycrc
+
+# --- Logs ---
+# General log files and package manager specific logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# --- Environment & Secrets ---
+# CRITICAL: These files may contain secret API keys.
+.env
+.env.local
+.env.*.local
+*.local # Note: This is a broad rule, be cautious.
+
+# But DO commit the example file as a template.
+!/.env.example
+
+# --- IDE & Editor Files ---
+# VS Code
+.vscode/
+# Exception to allow sharing recommended extensions with collaborators
+!.vscode/extensions.json
+
+# JetBrains (WebStorm, etc.)
+.idea/
+
+# Vim swap files
+*.swp
+*.swo
+
+# Other editor-specific files
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# --- Operating System Files ---
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# --- TypeScript ---
+# TypeScript build info cache file
+*.tsbuildinfo
