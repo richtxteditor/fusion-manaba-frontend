@@ -7,7 +7,7 @@
 
 Welcome to the beautiful, modern, and interactive storefront for **Fusion Manaba**! 🧁 This repository contains the user-facing application, built with a powerful and fast stack to provide a delightful shopping experience.
 
-This application is the "face" of the store, and it communicates with our powerful [Django Backend API](https://github.com/your-username/fusion-manaba-backend) to get all its data.
+This application is the "face" of the store, and it communicates with our powerful [Django Backend API](https://github.com/richtxteditor/fusion-manaba-backend) to get all its data.
 
 ---
 
@@ -50,7 +50,7 @@ After these steps, the core shopping experience will be complete, paving the way
 
 To run this project, you'll need both the frontend and backend servers running.
 
-1. **Start the Backend Server (https://github.com/richtxteditor/fusion-manaba-backend):**
+1. **Start the [Django Backend API](https://github.com/richtxteditor/fusion-manaba-backend):**
     Navigate to your `fusion-manaba-backend` directory and run the Django development server.
 
     ```bash
