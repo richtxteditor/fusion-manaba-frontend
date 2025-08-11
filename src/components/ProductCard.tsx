@@ -13,7 +13,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
         {product.category.name}
       </p>
-      <p className="mb-6 min-h-[4.5rem] text-gray-700 dark:text-gray-300">
+      <p className="mb-6 text-gray-700 dark:text-gray-300">
         {product.description || 'A delicious treat, crafted with care.'}
       </p>
       <div className="text-right text-3xl font-bold text-green-700 dark:text-green-500">
