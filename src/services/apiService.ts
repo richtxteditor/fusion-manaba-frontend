@@ -34,8 +34,8 @@ export interface Cart {
 }
 
 // --- Product Functions ---
-export const getProducts = async (): Promise<Product[]> => {
-  const response = await apiClient.get('/products/');
+export const getProducts = async (signal: AbortSignal): Promise<Product[]> => {
+  const response = await apiClient.get('/products/', { signal });
   return response.data;
 };
 

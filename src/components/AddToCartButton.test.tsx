@@ -10,11 +10,11 @@ vi.mock('../context/CartProvider');
 describe('AddToCartButton', () => {
   // Let TypeScript infer the type from the mock itself.
   // This is more robust and less tied to a specific framework's types.
-  const mockAddItem = vi.fn(); 
+  const mockAddItem = vi.fn();
 
   beforeEach(() => {
     // Clear any previous mock calls before each test
-    mockAddItem.mockClear(); 
+    mockAddItem.mockClear();
 
     vi.mocked(useCart).mockReturnValue({
       cart: null,
@@ -25,9 +25,11 @@ describe('AddToCartButton', () => {
     });
   });
 
+  // The new, correct test
   it('calls addItem when clicked', () => {
     render(<AddToCartButton productId={1} />);
-    const button = screen.getByRole('button', { name: /add to cart/i });
+    // This now looks for the ACCESSIBLE name provided by the aria-label.
+    const button = screen.getByRole('button', { name: /add item to cart/i });
     fireEvent.click(button);
     expect(mockAddItem).toHaveBeenCalledWith(1, 1);
   });

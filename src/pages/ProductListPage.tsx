@@ -11,19 +11,30 @@ function ProductListPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
+
     const fetchProducts = async () => {
       try {
         await new Promise(resolve => setTimeout(resolve, 500));
-        const data = await getProducts();
+        const data = await getProducts(signal);
         setProducts(data);
       } catch (err) {
+        if (signal.aborted) return; // Ignore abort errors
         setError('Failed to fetch products. Is the Django API server running?');
         console.error(err);
       } finally {
-        setLoading(false);
+        if (!signal.aborted) {
+          setLoading(false);
+        }
       }
     };
+
     fetchProducts();
+
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   // --- THIS IS THE KEY CHANGE ---
