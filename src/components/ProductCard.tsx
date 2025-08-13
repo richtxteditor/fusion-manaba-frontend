@@ -1,4 +1,5 @@
 import { type Product } from '../services/apiService';
+import AddToCartButton from './AddToCartButton';
 
 interface ProductCardProps {
   product: Product;
@@ -16,8 +17,11 @@ const ProductCard = ({ product }: ProductCardProps) => {
       <p className="mb-6 text-gray-700 dark:text-gray-300">
         {product.description || 'A delicious treat, crafted with care.'}
       </p>
-      <div className="text-right text-3xl font-bold text-green-700 dark:text-green-500">
-        ${product.price}
+      <div className="mt-6 flex items-center justify-between">
+        <div className="text-3xl font-bold text-green-700 dark:text-green-500">
+          ${product.price}
+        </div>
+        <AddToCartButton productId={product.id} />
       </div>
     </div>
   );
