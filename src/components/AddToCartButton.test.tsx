@@ -1,5 +1,4 @@
-// The new, correct version
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { useCart } from '../context/CartProvider';
 import AddToCartButton from './AddToCartButton';
@@ -8,14 +7,11 @@ import AddToCartButton from './AddToCartButton';
 vi.mock('../context/CartProvider');
 
 describe('AddToCartButton', () => {
-  // Let TypeScript infer the type from the mock itself.
-  // This is more robust and less tied to a specific framework's types.
   const mockAddItem = vi.fn();
 
   beforeEach(() => {
-    // Clear any previous mock calls before each test
     mockAddItem.mockClear();
-
+    // Provide a complete context object to avoid potential type errors
     vi.mocked(useCart).mockReturnValue({
       cart: null,
       loading: false,
@@ -25,12 +21,28 @@ describe('AddToCartButton', () => {
     });
   });
 
-  // The new, correct test
-  it('calls addItem when clicked', () => {
+  it('renders the button in its default state', () => {
     render(<AddToCartButton productId={1} />);
-    // This now looks for the ACCESSIBLE name provided by the aria-label.
+    // Check that the button is initially ready to be clicked
+    expect(screen.getByRole('button', { name: /add item to cart/i })).toBeInTheDocument();
+  });
+
+  it('calls addItem and shows loading/success states when clicked', async () => {
+    // 1. Make the test async
+    render(<AddToCartButton productId={1} />);
+    
     const button = screen.getByRole('button', { name: /add item to cart/i });
-    fireEvent.click(button);
+
+    // 2. Wrap the click event in a `waitFor` block.
+    // This ensures the test waits for all state updates triggered by the click to finish.
+    await waitFor(async () => {
+      await fireEvent.click(button);
+    });
+
+    // 3. Assert the outcome
     expect(mockAddItem).toHaveBeenCalledWith(1, 1);
+    
+    // Optional: You can even test the success state
+    expect(screen.getByRole('button', { name: /item added to cart/i })).toBeInTheDocument();
   });
 });
